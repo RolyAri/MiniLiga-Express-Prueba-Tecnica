@@ -1,0 +1,29 @@
+<div class="app-container">
+  <nav class="app-nav">
+    <div class="nav-content">
+      <div class="nav-header">
+        <span class="app-title">MiniLiga Express</span>
+      </div>
+      <div class="nav-tabs">
+        <a
+          [routerLink]="['/teams']"
+          routerLinkActive="active-tab"
+          class="nav-tab"
+        >
+          Equipos
+        </a>
+        <a
+          [routerLink]="['/standings']"
+          routerLinkActive="active-tab"
+          class="nav-tab"
+        >
+          Clasificación
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

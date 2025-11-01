@@ -1,0 +1,44 @@
+<div class="teams-layout">
+    <div class="card form-card">
+        <h2 class="card-title">Añadir Nuevo Equipo</h2>
+        <form [formGroup]="teamForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="form-group">
+                <label for="name" class="form-label">Nombre del Equipo</label>
+                <input type="text" id="name" formControlName="name"
+                    [class.invalid-input]="teamForm.get('name')?.invalid && teamForm.get('name')?.touched" />
+                <div *ngIf="teamForm.get('name')?.invalid && teamForm.get('name')?.touched" class="form-error">
+                    El nombre es requerido.
+                </div>
+            </div>
+            <button type="submit" [disabled]="teamForm.invalid || isLoading()">
+                {{ isLoading() ? 'Guardando...' : 'Guardar Equipo' }}
+            </button>
+            <div *ngIf="errorMessage()" class="form-error-api">
+                {{ errorMessage() }}
+            </div>
+        </form>
+    </div>
+
+    <div class="card list-card">
+        <h2 class="card-title">Equipos Registrados</h2>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="teams().length === 0">
+                        <td colspan="2" class="empty-state">No hay equipos registrados.</td>
+                    </tr>
+                    <tr *ngFor="let team of teams()">
+                        <td>{{ team.id }}</td>
+                        <td>{{ team.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

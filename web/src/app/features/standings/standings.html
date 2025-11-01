@@ -1,0 +1,48 @@
+<div class="card">
+    <h2 class="card-title">Clasificación de la Liga</h2>
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th class="position-header">Pos</th>
+                    <th>Equipo</th>
+                    <th title="Partidos Jugados">PJ</th>
+                    <th title="Ganados">G</th>
+                    <th title="Empatados">E</th>
+                    <th title="Perdidos">P</th>
+                    <th title="Goles a Favor">GF</th>
+                    <th title="Goles en Contra">GC</th>
+                    <th title="Diferencia de Goles">DG</th>
+                    <th title="Puntos">Pts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="isLoading()">
+                    <td colspan="10" class="empty-state">Cargando clasificación...</td>
+                </tr>
+                <tr *ngIf="!isLoading() && standings().length === 0">
+                    <td colspan="10" class="empty-state">No hay datos de clasificación disponibles.</td>
+                </tr>
+                <tr *ngFor="let item of standings(); let i = index" [class.top-position]="i < 3">
+                    <td class="position">{{ i + 1 }}</td>
+                    <td class="team-name">{{ item.nombre }}</td>
+                    <td>{{ item.partidos_jugados }}</td>
+                    <td>{{ item.ganados }}</td>
+                    <td>{{ item.empatados }}</td>
+                    <td>{{ item.perdidos }}</td>
+                    <td>{{ item.goles_favor }}</td>
+                    <td>{{ item.goles_contra }}</td>
+                    <td>{{ item.diferencia_goles }}</td>
+                    <td class="points">{{ item.puntos }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="legend">
+        <p>
+            <b>PJ</b>: Partidos Jugados, <b>G</b>: Ganados, <b>E</b>: Empatados,
+            <b>P</b>: Perdidos, <b>GF</b>: Goles a Favor, <b>GC</b>: Goles en Contra,
+            <b>DG</b>: Diferencia de Goles, <b>Pts</b>: Puntos
+        </p>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+.card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 24px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+}
+
+.data-table th {
+    background-color: #f0f2f5;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4a5568;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: help;
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-state {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+/* Estilos específicos para esta tabla */
+.position {
+    font-weight: 700;
+    text-align: center;
+    width: 50px;
+}
+
+.position-header {
+    text-align: center;
+}
+
+.team-name {
+    font-weight: 600;
+    color: #111827;
+}
+
+.points {
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Estilo para los 3 primeros puestos */
+.top-position {
+    background-color: #e6f7ff !important;
+    border-left: 4px solid var(--color-primary);
+}
+
+.legend {
+    padding: 12px 16px;
+    background-color: #f9fafb;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+}
