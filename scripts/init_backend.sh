@@ -25,7 +25,7 @@ cp .env.example .env
 mkdir -p database
 touch database/database.sqlite
 php -r "file_put_contents('.env', preg_replace('/^DB_CONNECTION=.*/m','DB_CONNECTION=sqlite', file_get_contents('.env')));"
-php -r "file_put_contents('.env', preg_replace('/^DB_DATABASE=.*/m,'DB_DATABASE=' . __DIR__ . '/database/database.sqlite', file_get_contents('.env')));"
+php -r "file_put_contents('.env', preg_replace('/^DB_DATABASE=.*/m','DB_DATABASE=' . __DIR__ . '/database/database.sqlite', file_get_contents('.env')));"
 
 echo "Creando migraciones y modelos..."
 php artisan make:model Team -m
