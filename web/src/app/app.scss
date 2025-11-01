@@ -1,0 +1,57 @@
+.app-container {
+    min-height: 100vh;
+}
+
+.app-nav {
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.nav-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-tab {
+    padding: 12px 4px;
+    margin-bottom: -1px;
+    /* Para que el borde pise al borde de la nav */
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.nav-tab:hover {
+    color: #333;
+    border-bottom-color: var(--color-border);
+}
+
+.nav-tab.active-tab {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.app-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+}
