@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Partidos Pendientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="loadPendingMatches($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isLoading()" class="ion-text-center ion-padding-top">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="!isLoading()">
+    <ion-item *ngIf="matches().length === 0" lines="none">
+      <ion-label class="ion-text-center ion-padding">
+        No hay partidos pendientes.
+      </ion-label>
+    </ion-item>
+
+    <ion-item
+      *ngFor="let match of matches()"
+      [routerLink]="['/report-result', match.id]"
+      button
+      detail="true"
+    >
+      <ion-label>
+        <h2>
+          {{ match.home_team.name }} vs {{ match.away_team.name }}
+        </h2>
+        <p>Partido #{{ match.id }} - Toca para reportar</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
