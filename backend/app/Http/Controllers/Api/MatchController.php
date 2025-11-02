@@ -13,9 +13,15 @@ class MatchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Game::with('homeTeam', 'awayTeam');
+
+        if ($request->query('played') === 'false') {
+            $query->whereNull('played_at');
+        }
+
+        return $query->orderBy('id', 'asc')->get();
     }
 
     /**
@@ -61,7 +67,7 @@ class MatchController extends Controller
         // Usamos 'with' para cargar las relaciones y evitar más consultas
         $match = Game::with('homeTeam', 'awayTeam')->findOrFail($id);
 
-        // Buena práctica: evitar registrar el resultado dos veces
+        // Evitar registrar el resultado dos veces
         if ($match->played_at) {
             return response()->json(['message' => 'El resultado de este partido ya fue registrado.'], 409); // 409 Conflict
         }
@@ -69,20 +75,20 @@ class MatchController extends Controller
         try {
             DB::beginTransaction();
 
-            // 1. Actualizar el partido
+            // Actualizar el partido
             $match->update([
                 'home_score' => $validated['home_score'],
                 'away_score' => $validated['away_score'],
                 'played_at' => now(),
             ]);
 
-            // 2. Actualizar equipo LOCAL (homeTeam)
+            // Actualizar equipo LOCAL (homeTeam)
             // (Accedemos a la relación cargada 'homeTeam')
             $match->homeTeam->goals_for += $validated['home_score'];
             $match->homeTeam->goals_against += $validated['away_score'];
             $match->homeTeam->save();
 
-            // 3. Actualizar equipo VISITANTE (awayTeam)
+            // Actualizar equipo VISITANTE (awayTeam)
             // (Accedemos a la relación cargada 'awayTeam')
             $match->awayTeam->goals_for += $validated['away_score'];
             $match->awayTeam->goals_against += $validated['home_score'];
