@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/matches"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reportar Resultado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submitResult()">
+    <ion-item>
+      <ion-label position="floating">Goles Local</ion-label>
+      <ion-input
+        type="number"
+        formControlName="home_score"
+      ></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('home_score')?.invalid && form.get('home_score')?.touched">
+      Campo requerido (mínimo 0)
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Goles Visitante</ion-label>
+      <ion-input
+        type="number"
+        formControlName="away_score"
+      ></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="form.get('away_score')?.invalid && form.get('away_score')?.touched">
+      Campo requerido (mínimo 0)
+    </ion-note>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      class="ion-margin-top"
+      [disabled]="form.invalid || isLoading()"
+    >
+      <ion-spinner *ngIf="isLoading()"></ion-spinner>
+      <ng-container *ngIf="!isLoading()">Enviar Resultado</ng-container>
+    </ion-button>
+  </form>
+  <ion-button expand="block" (click)="takePhoto()">Tomar foto</ion-button>
+  <img *ngIf="photo" [src]="photo" style="width: 100%; margin-top: 1rem;" />
+</ion-content>
